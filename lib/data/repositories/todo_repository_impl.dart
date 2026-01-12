@@ -3,11 +3,12 @@ import 'package:rivertodo/domain/entities/todo_item.dart';
 import 'package:rivertodo/domain/repositories/todo_repository.dart';
 
 class TodoRepositoryImpl extends TodoRepository {
-  final _todoList = <TodoItem>[];
+  List<TodoItem> _todoList = [];
 
   @override
   void create(TodoDraft item) {
-    // TODO: implement create
+    final int id = _todoList.length;
+    final todoItem = item.
   }
 
   @override
