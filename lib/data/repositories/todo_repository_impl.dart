@@ -24,8 +24,7 @@ class TodoRepositoryImpl extends TodoRepository {
 
   @override
   List<TodoItem> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+    return _todoList;
   }
 
   @override
