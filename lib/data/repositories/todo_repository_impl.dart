@@ -6,9 +6,11 @@ class TodoRepositoryImpl extends TodoRepository {
   List<TodoItem> _todoList = [];
 
   @override
-  void create(TodoDraft item) {
+  void create(TodoDraft draft) {
     final int id = _todoList.length;
-    final todoItem = item.
+    final todoItem = draft.toItem(id);
+
+    _todoList.add(todoItem);
   }
 
   @override
