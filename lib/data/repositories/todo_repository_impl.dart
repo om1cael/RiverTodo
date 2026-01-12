@@ -15,7 +15,11 @@ class TodoRepositoryImpl extends TodoRepository {
 
   @override
   void delete(int id) {
-    // TODO: implement delete
+    final item = _todoList
+      .where((item) => item.id == id)
+      .first;
+    
+    _todoList.remove(item);
   }
 
   @override
