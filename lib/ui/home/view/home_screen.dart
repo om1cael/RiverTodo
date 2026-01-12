@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/ui/home/view/todo_item_view.dart';
 import 'package:rivertodo/ui/home/view_model/home_view_model.dart';
 
@@ -12,6 +13,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _taskDescriptionTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _taskDescriptionTextController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +64,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   maxLength: 48,
                 ),
                 actions: [
-                  TextButton(
-                    onPressed: () {}, 
-                    child: Text('Create'),
+                  Consumer(
+                    builder: (context, ref, _) {
+                      return TextButton(
+                        onPressed: () {
+                          final viewModel = ref.read(homeViewModelProvider.notifier);
+
+                          final draft = TodoDraft(
+                            description: _taskDescriptionTextController.text
+                          );
+                          
+                          viewModel.createTask(draft);
+
+                          Navigator.of(context).pop();
+                          _taskDescriptionTextController.clear();
+                        }, 
+                        child: Text('Create'),
+                      );
+                    }
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
+                      _taskDescriptionTextController.clear();
                     }, 
                     child: Text('Cancel'),
                   ),
