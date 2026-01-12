@@ -3,8 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivertodo/ui/home/view/todo_item_view.dart';
 import 'package:rivertodo/ui/home/view_model/home_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _taskDescriptionTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,35 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context, 
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Create a new task'),
+                content: TextField(
+                  controller: _taskDescriptionTextController,
+                  maxLength: 48,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {}, 
+                    child: Text('Create'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }, 
+                    child: Text('Cancel'),
+                  ),
+                ],
+              );
+            }
+          );
+        },
+        child: Icon(Icons.create),
       ),
     );
   }
