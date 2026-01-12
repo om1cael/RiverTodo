@@ -28,15 +28,17 @@ class TodoRepositoryImpl extends TodoRepository {
   }
 
   @override
-  void update(TodoDraft updatedItem, int id) {
+  void update(TodoDraft updatedItemDraft, int id) {
     final item = _todoList
       .where((item) => item.id == id)
       .first;
     
-    item.copyWith(
+    final updatedItem = item.copyWith(
       id, 
-      updatedItem.description, 
-      updatedItem.isDone,
+      updatedItemDraft.description, 
+      updatedItemDraft.isDone,
     );
+
+    _todoList[_todoList.indexWhere((item) => item.id == updatedItem.id)] = updatedItem;
   }
 }
