@@ -8,4 +8,12 @@ class TodoItem {
     required this.description,
     required this.isDone,
   });
+
+  TodoItem copyWith(int? id, String? description, bool? isDone) {
+    return TodoItem(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      isDone: isDone ?? this.isDone,
+    );
+  }
 }
