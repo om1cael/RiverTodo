@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(top: 16, left: 16),
+        minimum: EdgeInsets.all(16),
         child: Column(
           children: [
             
