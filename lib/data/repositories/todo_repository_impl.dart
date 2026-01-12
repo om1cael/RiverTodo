@@ -1,6 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/domain/entities/todo_item.dart';
 import 'package:rivertodo/domain/repositories/todo_repository.dart';
+
+final TodoRepositoryImplProvider = Provider((_) {
+  return TodoRepositoryImpl();
+});
 
 class TodoRepositoryImpl extends TodoRepository {
   List<TodoItem> _todoList = [];
