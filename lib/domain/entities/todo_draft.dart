@@ -1,10 +1,8 @@
-class TodoItem {
-  final int id;
+class TodoDraft {
   final String description;
   final bool isDone;
 
-  const TodoItem({
-    required this.id,
+  const TodoDraft({
     required this.description,
     required this.isDone,
   });
