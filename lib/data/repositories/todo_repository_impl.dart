@@ -3,7 +3,7 @@ import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/domain/entities/todo_item.dart';
 import 'package:rivertodo/domain/repositories/todo_repository.dart';
 
-final TodoRepositoryImplProvider = Provider((_) {
+final todoRepositoryImplProvider = Provider((_) {
   return TodoRepositoryImpl();
 });
 
