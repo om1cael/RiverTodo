@@ -28,7 +28,6 @@ class TodoRepositoryImpl extends TodoRepository {
   }
 
   @override
-  void update(TodoItem item) {
-    // TODO: implement update
+  void update(int id) {
   }
 }
