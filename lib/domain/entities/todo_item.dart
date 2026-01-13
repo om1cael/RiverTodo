@@ -16,4 +16,9 @@ class TodoItem {
       isDone: isDone ?? this.isDone,
     );
   }
+
+  @override
+  String toString() {
+    return '$id, $description, $isDone';
+  }
 }

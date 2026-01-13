@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/domain/entities/todo_item.dart';
 import 'package:rivertodo/ui/todo_item/view_model/todo_item_view_model.dart';
 
@@ -13,6 +14,8 @@ class TodoItemView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(todoItemViewModelProvider);
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -23,17 +26,21 @@ class TodoItemView extends ConsumerWidget {
               children: [
                 Checkbox(
                   value: _todoItem.isDone, 
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    final draft = TodoDraft(
+                      description: _todoItem.description,
+                      isDone: value!,
+                    );
+
+                    viewModel
+                      .updateTask(draft, _todoItem.id);
+                  },
                 ),
                 Text(_todoItem.description),
               ],
             ),
             IconButton(
-              onPressed: () {
-                ref
-                  .read(todoItemViewModelProvider)
-                  .deleteTask(_todoItem.id);
-              }, 
+              onPressed: () => viewModel.deleteTask(_todoItem.id),
               icon: Icon(Icons.delete),
             ),
           ],
