@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivertodo/domain/entities/todo_draft.dart';
-import 'package:rivertodo/ui/home/view/todo_item_view.dart';
+import 'package:rivertodo/ui/todo_item/view/todo_item_view.dart';
 import 'package:rivertodo/ui/home/view_model/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
