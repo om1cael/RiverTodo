@@ -3,47 +3,47 @@ import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/domain/entities/todo_item.dart';
 import 'package:rivertodo/domain/repositories/todo_repository.dart';
 
-final todoRepositoryImplProvider = Provider((_) {
-  return TodoRepositoryImpl();
-});
+final todoRepositoryImplProvider = NotifierProvider(TodoRepositoryImpl.new);
 
 class TodoRepositoryImpl extends TodoRepository {
-  List<TodoItem> _todoList = [];
+  @override
+  List<TodoItem> build() {
+    return [];
+  }
 
   @override
   void create(TodoDraft draft) {
-    final int id = _todoList.length;
+    final int id = state.length;
     final todoItem = draft.toItem(id);
 
-    _todoList.add(todoItem);
+    state = [...state, todoItem];
   }
 
   @override
   void delete(int id) {
-    final item = _todoList
+    final item = state
       .where((item) => item.id == id)
       .first;
     
-    _todoList.remove(item);
+    state = state.where((listItem) => listItem.id != item.id).toList();
   }
 
   @override
   List<TodoItem> getAll() {
-    return _todoList;
+    return state;
   }
 
   @override
   void update(TodoDraft updatedItemDraft, int id) {
-    final item = _todoList
-      .where((item) => item.id == id)
-      .first;
-    
-    final updatedItem = item.copyWith(
-      id, 
-      updatedItemDraft.description, 
-      updatedItemDraft.isDone,
-    );
-
-    _todoList[_todoList.indexWhere((item) => item.id == updatedItem.id)] = updatedItem;
+    state = [
+      for(TodoItem item in state)
+        if(item.id == id)
+          item.copyWith(
+            item.id, 
+            updatedItemDraft.description, 
+            updatedItemDraft.isDone,
+          )
+        else item, 
+    ];
   }
 }

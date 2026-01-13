@@ -9,8 +9,7 @@ final homeViewModelProvider = NotifierProvider(HomeViewModel.new);
 class HomeViewModel extends Notifier<List<TodoItem>> {
   @override
   List<TodoItem> build() {
-    final todoRepository = ref.watch(todoRepositoryImplProvider);
-    return todoRepository.getAll();
+    return ref.watch(todoRepositoryImplProvider);
   }
 
   void createTask(TodoDraft draft) {

@@ -4,7 +4,7 @@ import 'package:rivertodo/domain/entities/todo_draft.dart';
 import 'package:rivertodo/domain/repositories/todo_repository.dart';
 
 final createUseCaseProvider = Provider((ref) => CreateUseCase(
-  todoRepository: ref.read(todoRepositoryImplProvider),
+  todoRepository: ref.read(todoRepositoryImplProvider.notifier),
 ));
 
 class CreateUseCase {
