@@ -33,23 +33,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Consumer(
-              builder: (context, ref, _) {
-                final todoList = ref.watch(homeViewModelProvider);
-
-                return ListView.builder(
-                  itemCount: todoList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_, item) {
-                    return TodoItemView(todoItem: todoList[item]);
-                  },
-                );
-              }
-            ),
-          ],
+        minimum: EdgeInsets.only(left: 16, right: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Consumer(
+                builder: (context, ref, _) {
+                  final todoList = ref.watch(homeViewModelProvider);
+          
+                  return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: todoList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (_, item) {
+                      return TodoItemView(todoItem: todoList[item]);
+                    },
+                  );
+                }
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
