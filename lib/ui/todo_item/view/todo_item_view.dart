@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivertodo/domain/entities/todo_item.dart';
+import 'package:rivertodo/ui/todo_item/view_model/todo_item_view_model.dart';
 
-class TodoItemView extends StatelessWidget {
+class TodoItemView extends ConsumerWidget {
   const TodoItemView({
     super.key,
     required TodoItem todoItem,
@@ -10,7 +12,7 @@ class TodoItemView extends StatelessWidget {
   final TodoItem _todoItem;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -27,7 +29,11 @@ class TodoItemView extends StatelessWidget {
               ],
             ),
             IconButton(
-              onPressed: () {}, 
+              onPressed: () {
+                ref
+                  .read(todoItemViewModelProvider)
+                  .deleteTask(_todoItem.id);
+              }, 
               icon: Icon(Icons.delete),
             ),
           ],
