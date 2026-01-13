@@ -5,7 +5,7 @@ import 'package:rivertodo/domain/repositories/todo_repository.dart';
 
 final todoRepositoryImplProvider = NotifierProvider(TodoRepositoryImpl.new);
 
-class TodoRepositoryImpl extends TodoRepository {
+class TodoRepositoryImpl extends Notifier<List<TodoItem>> implements TodoRepository {
   @override
   List<TodoItem> build() {
     return [];
